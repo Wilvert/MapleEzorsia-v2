@@ -71,6 +71,11 @@ void Client::UpdateGameStartup() {
 	//Clears jumpcount when jumping on ground 
 	Memory::CodeCave(clearJumps, 0x009B2015, 5);
 
+	//Set Aran combo uptime to 7000 milliseconds
+	Memory::WriteInt(0x0094BDC8 + 1, 0x1B58);
+	Memory::WriteInt(0x00960708 + 1, 0x1B58);
+	Memory::WriteInt(0x0096095B + 1, 0x1B58);
+
 	//nametags height to fix emblem missing line
 	Memory::WriteByte(0x005F12EF + 2, 0x05);
 
