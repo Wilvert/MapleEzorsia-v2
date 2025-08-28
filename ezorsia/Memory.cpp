@@ -108,10 +108,40 @@ void Memory::WriteByteArray(const DWORD dwOriginAddress, unsigned char* ucValue,
 }
 
 void Memory::CodeCave(void* ptrCodeCave, const DWORD dwOriginAddress, const int nNOPCount) { //tested and working
-	__try {
-		if (nNOPCount) FillBytes(dwOriginAddress, 0x90, nNOPCount); // create space for the jmp
-		WriteByte(dwOriginAddress, 0xe9); // jmp instruction
-		WriteInt(dwOriginAddress + 1, (int)(((int)ptrCodeCave - (int)dwOriginAddress) - 5)); // [jmp(1 byte)][address(4 bytes)] //this means you need to clear a space of at least 5 bytes (nNOPCount bytes)
-	} __except (EXCEPTION_EXECUTE_HANDLER) {}
+    __try {
+        if (nNOPCount) FillBytes(dwOriginAddress, 0x90, nNOPCount); // create space for the jmp
+        WriteByte(dwOriginAddress, 0xe9); // jmp instruction
+        WriteInt(dwOriginAddress + 1, (int)(((int)ptrCodeCave - (int)dwOriginAddress) - 5)); // [jmp(1 byte)][address(4 bytes)] //this means you need to clear a space of at least 5 bytes (nNOPCount bytes)
+    }
+    __except (EXCEPTION_EXECUTE_HANDLER) {}
+}
+
+void Memory::WriteValue(const DWORD dwOriginAddress, const unsigned int dwValue) {
+    if (UseVirtuProtect) {
+        DWORD dwOldProtect;
+        VirtualProtect((LPVOID)dwOriginAddress, sizeof(unsigned int), PAGE_EXECUTE_READWRITE, &dwOldProtect);
+        *(unsigned int*)dwOriginAddress = dwValue;
+        VirtualProtect((LPVOID)dwOriginAddress, sizeof(unsigned int), dwOldProtect, &dwOldProtect);
+    }
+    else { *(unsigned int*)dwOriginAddress = dwValue; }
+}
+
+void Memory::PatchNop(DWORD dwAddress, UINT nCount)
+{
+    if (nCount == 0)
+        return;
+
+    MEMORY_BASIC_INFORMATION mbi;
+    DWORD dwOldProtect;
+
+    // Get the current memory protection
+    VirtualQuery((LPVOID)dwAddress, &mbi, sizeof(MEMORY_BASIC_INFORMATION));
+    VirtualProtect(mbi.BaseAddress, mbi.RegionSize, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+
+    // Fill the memory with NOPs
+    memset((void*)dwAddress, 0x90, nCount);
+
+    // Restore the original memory protection
+    VirtualProtect(mbi.BaseAddress, mbi.RegionSize, dwOldProtect, &dwOldProtect);
 }
 //#pragma optimize("", on)

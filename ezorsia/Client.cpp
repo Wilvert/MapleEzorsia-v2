@@ -62,6 +62,166 @@ void Client::UpdateGameStartup() {
 
 	Memory::WriteByte(0x0040013E, 0x2F);  //4g edit, not sure if it still works after execution
 
+	#pragma region Wilvert
+
+	//Dubbel jump
+	Memory::CodeCave(evaluateHasJumped, 0x009B204B, 5);
+	//Executes Jump physics if player has not jumped
+	Memory::CodeCave(jumpPhysics, 0x009B20FD, 6);
+	//Clears jumpcount when jumping on ground 
+	Memory::CodeCave(clearJumps, 0x009B2015, 5);
+
+	//nametags height to fix emblem missing line
+	Memory::WriteByte(0x005F12EF + 2, 0x05);
+
+	// Mid air teleport
+	Memory::FillBytes(0x00957C2D, 0x90, 6);
+
+	// Close range removed (i.e no wack on bow or claw.)
+	Memory::WriteByte(0x009516C2, 0xE9);
+	Memory::WriteByte(0x009516C2 + 1, 0xc8);
+	Memory::WriteByte(0x009516C2 + 2, 0xfc);
+	Memory::WriteByte(0x009516C2 + 3, 0xff);
+	Memory::WriteByte(0x009516C2 + 4, 0xff);
+
+	// Instant FA
+	Memory::WriteByte(0x0095795E, 0x83);
+	Memory::WriteByte(0x0095795E + 1, 0xC0);
+	Memory::WriteByte(0x0095795E + 2, 0x00);
+
+	//Render Pet Behind Player
+	Memory::WriteByte(0x0070451B + 2, 1); // Over NPCs and Mobs & behind characters
+
+	//Expanded Ignore Slots
+	Memory::WriteByte(0x00900AD4 + 1, 0xC9); //Increase render Area, should be tight like this
+	Memory::WriteByte(0x00900AD9 + 1, 0xB4); //Increase render Area
+
+	Memory::WriteByte(0x008FC9F7 + 2, 0xF7); //Fixes Scrollbar
+
+	Memory::WriteByte(0x008FCADF + 2, 0x0A); //Increase Draw amount to 10
+	Memory::WriteByte(0x008FD26E + 2, 0xB8);  //Increase GetItemIndexFromPoint by (14*4)=56
+
+	Memory::WriteByte(0x008FCF1D + 3, 0x28); //Increase the CAP
+
+	Memory::CodeCave(ExceptionList_BackButton_CodeCave, 0x008FC6D3, 9);
+	Memory::CodeCave(ExceptionList_MesoButton_CodeCave, 0x008FC756, 6);
+	Memory::CodeCave(ExceptionList_RegisterButton_CodeCave, 0x008FC7D6, 6);
+	Memory::CodeCave(ExceptionList_DeleteButton_CodeCave, 0x008FC859, 6);
+	Memory::CodeCave(ExceptionList_Scrollbar_CodeCave, 0x008FC8A2, 13);
+
+	// Remove: "You may not use this skill yet" message - General
+	Memory::PatchNop(0x00967707, 12);
+
+	// Remove: "This card is already full..." message - General
+	Memory::PatchNop(0x00A08283, 18);
+
+	// Remove: "You Must Catch Your Breath..." - General
+	Memory::WriteByte(0x00452316, 0x7C);
+
+	// Remove: Gender Checks on Gear - General
+	Memory::PatchNop(0x00460AED, 2);
+	
+	// Allow PIC to be Typed - General
+	Memory::FillBytes(0x0076F7DE, 0x90, 6);
+
+	// Remove SP Checks Between Jobs - General
+	Memory::WriteByte(0x008AD01A, 0xE9);
+	Memory::WriteValue(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
+
+	// Disable AutoAssign Button - Pepa
+	Memory::CodeCave(autoAssignRemove, 0x008C5920, 5);
+
+	// Move & Attack Simultaneously - Root Leak
+	Memory::WriteByte(0x0095F97A, 0xEB);
+	Memory::WriteByte(0x0095F97A + 1, 0x59);
+	Memory::WriteByte(0x009CBFB0, 0xEB);
+	Memory::PatchNop(0x0094C3BB, 6);
+
+	// Disable AutoAssign Button - Pepa
+	Memory::CodeCave(autoAssignRemove, 0x008C5920, 5);
+
+	// CUIStatusBar::OnCreate
+	Memory::WriteByte(0x008D155C + 1, 0xF0); // Draw rest of quickslot bar
+	Memory::WriteByte(0x008D155C + 2, 0x03);
+	Memory::WriteByte(0x008D182E + 1, 0xF0); // Draw rest of hotkeys
+	Memory::WriteByte(0x008D182E + 2, 0x03);
+	Memory::WriteByte(0x008D1AC0 + 1, 0xF0); // Draw rest of cooldowns, who tf knows why. TY Rulax
+	Memory::WriteByte(0x008D1AC0 + 2, 0x03);
+
+	//----CQuickslotKeyMappedMan::CQuickslotKeyMappedMan?????
+	Memory::WriteInt(0x0072B7CE + 1, (DWORD)&Array_aDefaultQKM_0);
+	Memory::WriteInt(0x0072B8EB + 1, (DWORD)&Array_aDefaultQKM_0);
+
+	//----CUIStatusBar::CQuickSlot::CompareValidateFuncKeyMappedInfo
+	Memory::WriteByte(0x008DD916, 0x1A); // increase 8 --> 26
+	Memory::WriteByte(0x008DD8AD, 0x1A); // increase 8 --> 26
+	Memory::WriteByte(0x008DD8FD, 0xBB);
+	Memory::WriteInt(0x008DD8FD + 1, (DWORD)&Array_Expanded);
+	Memory::WriteByte(0x008DD8FD + 5, 0x90); //Errant byte
+	Memory::WriteByte(0x008DD898, 0xB8);
+	Memory::WriteInt(0x008DD898 + 1, (DWORD)&Array_Expanded);
+	Memory::WriteByte(0x008DD898 + 5, 0x90); //Errant Byte
+
+	//----CUIStatusBar::CQuickSlot::Draw
+	Memory::WriteByte(0x008DE75E + 3, 0x6C);
+	Memory::WriteByte(0x008DDF99, 0xB8);
+	Memory::WriteInt(0x008DDF99 + 1, (DWORD)&Array_Expanded);
+	Memory::FillBytes(0x008DDF99 + 5, 0x90, 3); // Nopping errant operations
+
+	//----CUIStatusBar::OnMouseMove
+	Memory::WriteByte(0x008D7F1E + 1, 0x34);
+	Memory::WriteByte(0x008D7F1E + 2, 0x85);
+	Memory::WriteInt(0x008D7F1E + 3, (DWORD)&Array_Expanded);
+
+	//----CUIStatusBar::CQuickSlot::GetPosByIndex
+	Memory::WriteInt(0x008DE94D + 2, (DWORD)&Array_ptShortKeyPos);
+	Memory::WriteInt(0x008DE955 + 2, (DWORD)&Array_ptShortKeyPos + 4);
+	Memory::WriteByte(0x008DE941 + 2, 0x1A); //change cmp 8 --> cmp 26
+
+	//CUIStatusBar::GetShortCutIndexByPos
+	Memory::WriteInt(0x008DE8F4 + 1, (DWORD)&Array_ptShortKeyPos + 4);
+	Memory::WriteByte(0x008DE926 + 1, 0x3E);
+
+	//CUIStatusBar::CQuickSlot::DrawSkillCooltime
+	Memory::WriteByte(0x008E099F + 3, 0x1A);
+	Memory::WriteByte(0x008E069D, 0xBE);
+	Memory::WriteInt(0x008E069D + 1, (DWORD)&cooldown_Array); //Pass enlarged FFFFF array
+	Memory::WriteByte(0x008E069D + 5, 0x90); //Errant byte
+	Memory::WriteByte(0x008E06A3, 0xBF);
+	Memory::WriteInt(0x008E06A3 + 1, (DWORD)&Array_Expanded + 1);
+	Memory::WriteByte(0x008E06A3 + 5, 0x90);
+
+	//----CDraggableMenu::OnDropped
+	Memory::WriteByte(0x004F928A + 2, 0x1A); //change cmp 8 --> cmp 26
+	//----CDraggableMenu::MapFuncKey
+	Memory::WriteByte(0x004F93F9 + 2, 0x1A); //change cmp 8 --> cmp 26
+	//----CUIKeyConfig::OnDestroy
+	Memory::WriteByte(0x00833797 + 2, 0x6C); // Updates the offset to 108 (triple) (old->24h)
+	Memory::WriteByte(0x00833841 + 2, 0x6C); // Updates the offset to 108 (triple) (old->24h)
+	Memory::WriteByte(0x00833791 + 1, 0x68); // push 68h (triple)
+	Memory::WriteByte(0x0083383B + 1, 0x68); // push 68h (triple)
+	//----CUIKeyConfig::~CUIKeyConfig
+	Memory::WriteByte(0x0083287F + 2, 0x6C); // triple the base value at this hex (old->24h)
+	Memory::WriteByte(0x00832882 + 1, 0x68); // push 68h (triple)
+	//----CQuickslotKeyMappedMan::SaveQuickslotKeyMap
+	Memory::WriteByte(0x0072B8C0 + 2, 0x6C); // triple the base value at this hex (old->24h)
+	Memory::WriteByte(0x0072B8A0 + 1, 0x68); // push 68h, (triple) //CQuickslotKeyMappedMan::SaveQuickslotKeyMap
+	Memory::WriteByte(0x0072B8BD + 1, 0x68); // push 68h, (triple) //CQuickslotKeyMappedMan::SaveQuickslotKeyMap
+	//----CQuickslotKeyMappedMan::OnInit
+	Memory::WriteByte(0x0072B861 + 1, 0x68); // push 68h (triple) (these ones might have to be just 60)
+	Memory::WriteByte(0x0072B867 + 2, 0x6C); // triple the base value at this hex (old->24h)
+	//----CUIKeyConfig::CNoticeDlg::OnChildNotify????
+	Memory::WriteByte(0x00836A1E + 1, 0x68); // push 68h (triple)
+	Memory::WriteByte(0x00836A21 + 2, 0x6C); // triple the base value at this hex (old->24h)
+
+	Memory::CodeCave(CompareValidateFuncKeyMappedInfo_cave, 0x8DD8B8, 5);
+	Memory::CodeCave(sub_9FA0CB_cave, 0x9FA0DB, 5);
+	Memory::CodeCave(sDefaultQuickslotKeyMap_cave, 0x72B7BC, 5);
+	Memory::CodeCave(DefaultQuickslotKeyMap_cave, 0x72B8E6, 5);
+	//Memory::CodeCave(Restore_Array_Expanded, 0x008CFDFD, 6); //restores the skill array to 0s
+
+	#pragma endregion
+
 	//other potential resolution edits/etc
 
 	//0043D260 //0043D3E2 //0043D5C8	//CAnimationDisplayer::Effect_RewardRullet
@@ -93,6 +253,36 @@ void Client::UpdateResolution() {
 	Memory::CodeCave(AdjustStatusBarBG, dwStatusBarBackgroundVPos, 5);
 	Memory::CodeCave(AdjustStatusBarInput, dwStatusBarInputVPos, 9);
 
+
+	// World Map Centered - leevccc
+	wordMapX = (Client::m_nGameWidth - 666) / 2;
+	wordMapY = (Client::m_nGameHeight - 524) / 2;
+	Memory::CodeCave(wordMapUIcc, 0x009EB594, 13);
+
+	//Expanded Skills - Goose
+	Memory::WriteByte(0x008AA86F + 1, 0x73); // Extend rendering area to fit modified wz
+	Memory::WriteByte(0x008AACD5 + 1, 0xF0); // Extends scrollbar
+	Memory::WriteByte(0x008AAE23 + 1, 0x59); // Moves Macro button down
+
+	Memory::WriteByte(0x008AD9F2 + 2, 0x4F); // Draw extra tooltips
+	Memory::WriteByte(0x008ACE76 + 3, 0x66); // Draw Extra icons
+	Memory::WriteByte(0x008AD7B4 + 2, 0xFB); // Scrollbar Fix
+	Memory::WriteByte(0x008AC4DF + 1, 0x5B); // Skillpoints Y offset
+	Memory::WriteByte(0x008AADAC + 3, 0x67); // Level-up buttons expanded
+	Memory::WriteByte(0x008AB929 + 2, 0xE0); // Makes new buttons clickable
+
+	Memory::WriteByte(0x008AD903 + 2, 0x06); // Increases buttons to be read in SetButton
+	Memory::WriteByte(0x008AD7F8 + 2, 0x06); // Increases buttons to be read in SetButton
+
+	//CUISkill::OnCreate
+	Memory::WriteByte(0x008AAD3C + 1, 5); //lea eax
+	Memory::WriteInt(0x008AAD3C + 2, (DWORD)&skillup_btn_Array + 12);
+
+	//CUISKill::SetButton
+	Memory::WriteByte(0x008AD920 + 1, 0x34); // lea ecx, [eax*8..
+	Memory::WriteByte(0x008AD920 + 2, 0xC5); // lea ecx, [eax*8..
+	Memory::WriteInt(0x008AD920 + 3, (DWORD)&skillup_btn_Array + 12); //..Array]
+
 	Memory::WriteInt(dwApplicationHeight + 1, m_nGameHeight);//push 600
 	Memory::WriteInt(dwApplicationWidth + 1, m_nGameWidth);	//push 800 ; CWvsApp::InitializeGr2D
 	Memory::WriteInt(dwCursorVectorVPos + 2, (int)floor(-m_nGameHeight / 2));//push -300				!!moves all interactable UI elements!!
@@ -118,8 +308,8 @@ void Client::UpdateResolution() {
 	Memory::WriteInt(dwQuickSlotInitHPos + 1, 798); //push 647 //hd800
 	Memory::WriteInt(dwQuickSlotVPos + 2, m_nGameHeight + 1);//add esi,533
 	Memory::WriteInt(dwQuickSlotHPos + 1, 798); //push 647 //hd800
-	Memory::WriteInt(dwQuickSlotCWndVPos + 2, (600 - m_nGameHeight) / 2 - 427); //lea edi,[eax-427]
-	Memory::WriteInt(dwQuickSlotCWndHPos + 2, -798); //lea ebx,[eax-647]
+	Memory::WriteInt(dwQuickSlotCWndVPos + 2, -500); //0x008DE8EE: lea edi,[eax-427]
+	Memory::WriteInt(dwQuickSlotCWndHPos + 2, -798); //0x008DE8E5: lea ebx,[eax-647]
 
 	//Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth + 100); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove ##BAK
 	Memory::WriteInt(dwByteAvatarMegaHPos + 1, m_nGameWidth); //push 800 ; CAvatarMegaphone::ByeAvatarMegaphone ; IWzVector2D::RelMove

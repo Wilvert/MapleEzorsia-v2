@@ -28,6 +28,66 @@ __declspec(naked) void LoadUItwice() {
 	}
 }
 
+// Double Jump Mechanics - Ezorsia V2
+
+// Part 1: Evaluate Jump State
+extern "C" int jumpCount = 0;
+const void* dblJumpFalse = reinterpret_cast<void*>(0x009B2139);
+const void* jumpReturnAddress = reinterpret_cast<void*>(0x009B204B);
+const void* proceedDoubleJump = reinterpret_cast<void*>(0x009B2053);
+
+__declspec(naked) void evaluateHasJumped() {
+	__asm {
+		pushfd
+		pushad
+		cmp[jumpCount], 1
+		je goToEnd
+
+		popad
+		popfd
+		jmp[proceedDoubleJump]
+		goToEnd:
+		popad
+			popfd
+			jmp[dblJumpFalse]
+	}
+}
+
+// Part 2: Jump Physics
+extern "C" const double jumpMult = 2.5;
+const void* firstCall = reinterpret_cast<void*>(0x006724FC);
+const void* continueAddress = reinterpret_cast<void*>(0x009B211C);
+const void* fixed_call = reinterpret_cast<void*>(0x00BEBFA0);
+
+__declspec(naked) void jumpPhysics() {
+	__asm {
+		mov eax, [esi + 424] // 1A8h
+		lea ecx, [eax + 6Ch] // 84h
+		call firstCall
+		mov eax, [fixed_call]
+		mov eax, dword ptr[eax]
+		mov eax, [eax + 8]
+		fmul qword ptr[eax + 72]
+		fmul qword ptr[ebp - 32]
+		fmul[jumpMult]
+		inc dword ptr[jumpCount]
+		jmp continueAddress
+	}
+}
+
+// Part 3: Clear Jump Count
+const int push_val = 2273;
+const void* onGroundJumpProceed = reinterpret_cast<void*>(0x009B201D);
+
+__declspec(naked) void clearJumps() {
+	__asm {
+		lea eax, [ebp - 18h]
+		push[push_val]
+		mov dword ptr[jumpCount], 0
+		jmp[onGroundJumpProceed]
+	}
+}
+
 int nStatusBarY = 0;
 __declspec(naked) void AdjustStatusBar() {
 	__asm {
@@ -37,6 +97,327 @@ __declspec(naked) void AdjustStatusBar() {
 		jmp dword ptr[dwStatusBarPosRetn]
 	}
 }
+
+// Disable Auto Assign Button
+DWORD autoAssign_ret = 0x008C5926;
+__declspec(naked) void autoAssignRemove()
+{
+	_asm {
+		lea ecx, [eax + 4]
+		mov eax, [ecx]
+		push 0
+		jmp autoAssign_ret
+	}
+}
+
+// World Map to middle of screen
+int wordMapX, wordMapY;
+DWORD wordMapUIccRtn = 0x009EB5A1;
+__declspec(naked) void wordMapUIcc()
+{
+	__asm {
+		push 20Ch
+		push 29Ah
+		push wordMapY
+		push wordMapX
+		jmp wordMapUIccRtn
+	}
+}
+
+//Long skillbar
+DWORD Array_aDefaultQKM_Address = (DWORD)&Array_aDefaultQKM;
+DWORD Array_mystery_Address = (DWORD)&Array_Expanded;
+DWORD Array_mystery_Address_plus = (DWORD)&Array_Expanded + 1;
+DWORD cooldown_Array_Address = (DWORD)&cooldown_Array;
+
+DWORD CompareValidate_Retn = 0x8DD8BD;
+_declspec(naked) void CompareValidateFuncKeyMappedInfo_cave()
+{
+	_asm
+	{
+		push 0x138;
+		push 0x0;
+		push eax;
+		pushad;
+		popad;
+		jmp CompareValidate_Retn
+			//push 0x8DD8BD;
+			//ret;
+	}
+}
+
+DWORD sub_9FA0CB_cave_retn_1 = 0x9FA0E1;
+_declspec(naked) void sub_9FA0CB_cave()
+{
+	_asm {
+		test eax, eax;
+		jne label;
+		push 0xD4;
+		pushad;
+		popad;
+		// -> ZAllocEx<ZAllocAnonSelector>::Alloc(ZAllocEx<ZAllocAnonSelector>::_s_alloc, 0x44u);
+		//push 0x9FA0E1;
+		//ret;
+		jmp sub_9FA0CB_cave_retn_1
+			label :
+		push 0x138;
+		push 0x0;
+		push eax;
+		pushad;
+		popad;
+		// -> memset(this + 0xD20, 0, 0x60u);
+		//push 0x8DD8BD;
+		//ret;
+		jmp CompareValidate_Retn
+	}
+}
+//DWORD sDefaultQuickslotKeyMap_cave_retn = 0x72B7C2;
+_declspec(naked) void sDefaultQuickslotKeyMap_cave()
+{
+	_asm {
+		push ebx;
+		push esi;
+		push edi;
+		xor edx, edx;
+		mov ebx, ecx;
+		call label;
+		nop;
+		lea edi, dword ptr ds : [ebx + 0x4] ;
+		mov ecx, 0x1A;
+		mov esi, Array_aDefaultQKM_Address;
+		rep movsd;
+		lea edi, dword ptr ds : [ebx + 0x6C] ;
+		mov ecx, 0x1A;
+		mov esi, Array_aDefaultQKM_Address;
+		rep movsd;
+		pop edi;
+		pop esi;
+		pop ebx;
+		ret;
+		// 0xBF8EE8
+	label:
+		push esi;
+		mov esi, ecx;
+		lea eax, dword ptr ds : [esi + 0x4] ;
+		// -> _DWORD *__fastcall sub_72B7BC(_DWORD *a1)
+		push 0x72B7C2;
+		ret;
+		//jmp sDefaultQuickslotKeyMap_cave_retn
+	}
+}
+_declspec(naked) void DefaultQuickslotKeyMap_cave()
+{
+	_asm {
+		push esi;
+		push edi;
+		lea eax, dword ptr ds : [ecx + 0x4] ;
+		mov esi, Array_aDefaultQKM_Address;
+		mov ecx, 0x1A;
+		mov edi, eax;
+		rep movsd;
+		pop edi;
+		pop esi;
+		ret;
+	}
+}
+
+// LTRB Handling for Bullet Skills
+DWORD dwFireArrow = 0x00955DA8;
+DWORD dwFireArrowRet = 0x00955DAD;
+DWORD dwFireSucc = 0x00956372;
+__declspec(naked) void FireArrow() {
+	__asm {
+
+		cmp eax, 2101005 // Poison Breath
+		je success
+		cmp eax, 2301005 // Holy Ray
+		je success
+		cmp eax, 4101006 // Shuriken MAX
+		je success
+		cmp eax, 3201005 // Iron Arrow
+		je success
+		cmp eax, 0x0021E3CB
+		jmp dwFireArrowRet
+		success :
+		jmp dwFireSucc
+	}
+}
+
+// LTRB Handling for Bullet Skills
+DWORD dwFireBulletAdd = 0x00956445;
+DWORD dwFireBulletSucc = 0x0095645B;
+DWORD dwFireBulletRet = 0x0095644E;
+__declspec(naked) void FireArrowBullet() {
+	__asm {
+		cmp dword ptr[ebp - 0x14], 2101005 // Poison Breath
+		je success
+		cmp dword ptr[ebp - 0x14], 2301005 // Holy Ray
+		je success
+		cmp dword ptr[ebp - 0x14], 4101006 // Shuriken MAX
+		je success
+		cmp dword ptr[ebp - 0x14], 3201005 // Iron Arrow
+		je success
+		jmp dwFireBulletRet
+		success :
+		jmp dwFireBulletSucc
+	}
+}
+
+
+// Reduced CD: Recoil Shot
+DWORD dwRecoilShot = 0x00953646;
+DWORD dwRecoilShotRet = 0x0095364D;
+DWORD dwRecoilShotSucc = 0x00953669;
+__declspec(naked) void RecoilShotLowerCD() {
+	__asm {
+		cmp eax, 5201006
+		je success
+		jmp dwRecoilShotRet
+		success :
+		mov eax, 100//700 //originally 2000ms
+			jmp dwRecoilShotSucc
+	}
+}
+
+
+// Remove Charge: Big Bang Bishop
+DWORD dwBB = 0x00967ECC;
+DWORD dwBBReturn = 0x00967ED2;
+DWORD dwBBS = 0x0096928B;
+__declspec(naked) void BigBang() {
+	__asm
+	{
+		je BBS
+		jmp dword ptr[dwBBReturn]
+		BBS:
+		jmp dword ptr[dwBBS]
+	}
+}
+
+
+// Remove Charge: Big Bang IL
+DWORD dwBB2 = 0x00967DEE;
+DWORD dwBB2Return = 0x00967DF4;
+DWORD dwBBS2 = 0x0096928B;
+__declspec(naked) void BigBang2() {
+	__asm
+	{
+		je BBS2
+		jmp dword ptr[dwBB2Return]
+		BBS2:
+		jmp dword ptr[dwBBS2]
+	}
+}
+
+// Remove Charge: Big Bang FP
+DWORD dwBB3 = 0x00967D10;
+DWORD dwBB3Return = 0x00967D16;
+DWORD dwBBS3 = 0x0096928B;
+__declspec(naked) void BigBang3() {
+	__asm
+	{
+		je BBS3
+		jmp dword ptr[dwBB3Return]
+		BBS3:
+		jmp dword ptr[dwBBS3]
+	}
+}
+
+// Remove Charge: Piercing Arrow
+DWORD dwPA = 0x00968048;
+DWORD dwPAReturn = 0x00967B8B;
+DWORD dwPAS = 0x009690E9;
+__declspec(naked) void PA() {
+	__asm {
+		je PAS
+		jmp dword ptr[dwPAReturn]
+		PAS:
+		jmp dword ptr[dwPAS]
+	}
+}
+
+// Remove Charge: Corkscrew Blow
+DWORD dwCB = 0x00968278;
+DWORD dwCBReturn = 0x00967B8B;
+DWORD dwCBS = 0x009690AE;
+__declspec(naked) void CorkscrewBlow() {
+	__asm {
+		je CBS
+		jmp dword ptr[dwCBReturn]
+		CBS:
+		jmp dword ptr[dwCBS]
+	}
+}
+
+// Fix Mouse Scroll Issue
+DWORD fixMouseWheelAddr = 0x009E8090;
+DWORD fixMouseWheelRetJmpAddr = 0x009E809F;
+DWORD SetCursorVectorPos = 0x0059A0CB;
+__declspec(naked) void fixMouseWheelHook() {
+	__asm {
+		// is mouse wheel
+		cmp eax, 522
+		je[halo3]
+		mov eax, dword ptr[edi]
+		shr eax, 0x10
+		push eax
+		movzx eax, word ptr[edi]
+		push eax
+		call SetCursorVectorPos
+		halo3 :
+		jmp[fixMouseWheelRetJmpAddr]
+	}
+}
+
+// Align Chat Box Text
+DWORD chat_Y_offset_retn = 0x008DD6BE;
+DWORD call_func_chat_cave = 0x00403382;
+__declspec(naked) void chat_Y_offset_cave()
+{
+	_asm {
+		call call_func_chat_cave
+		push eax
+		mov eax, [ebp - 28h]
+		dec eax
+		mov[ebp - 28h], eax
+		pop eax
+		jmp chat_Y_offset_retn
+	}
+}
+
+// Align Monster Book Text
+DWORD pos1Rtn = 0x0086437D;
+DWORD pos2Rtn = 0x0086449A;
+DWORD pos3Rtn = 0x008645B9;
+__declspec(naked) void pos1()
+{
+	__asm {
+		push 146
+		sub eax, edi
+		push eax
+		jmp pos1Rtn
+	}
+}
+__declspec(naked) void pos2()
+{
+	__asm {
+		push 180
+		sub eax, edi
+		push eax
+		jmp pos2Rtn
+	}
+}
+__declspec(naked) void pos3()
+{
+	__asm {
+		push 200
+		sub eax, edi
+		push eax
+		jmp pos3Rtn
+	}
+}
+
+
 
 __declspec(naked) void AdjustStatusBarBG() {
 	__asm {
@@ -74,6 +455,65 @@ __declspec(naked) void PositionLoginUsername() {
 		jmp dword ptr[dwLoginUsernameRtn]
 	}
 }
+
+_declspec(naked) void ExceptionList_BackButton_CodeCave()
+{
+	_asm {
+		push 1
+		push 5 //Y (from top)
+		push 162 //X
+
+		push 0x008FC6DC
+		retn
+	}
+}
+_declspec(naked) void ExceptionList_MesoButton_CodeCave()
+{
+	_asm {
+		push 1
+		push 179 //Y
+		push 100 //X (from 10)
+
+		push 0x008FC75C
+		retn
+	}
+}
+_declspec(naked) void ExceptionList_RegisterButton_CodeCave()
+{
+	_asm {
+		push 1
+		push 179 //Y
+		push 133 //X (from 80)
+
+		push 0x008FC7DC
+		retn
+	}
+}
+_declspec(naked) void ExceptionList_DeleteButton_CodeCave()
+{
+	_asm {
+		push 1
+		push 179 //Y
+		push 10 //X (from 124)
+
+		push 0x008FC85F
+		retn
+	}
+}
+_declspec(naked) void ExceptionList_Scrollbar_CodeCave()
+{
+	_asm {
+		push 148 //vertical length
+		push 25
+		push 161
+		push 3
+		push 1
+
+		push 0x008FC8AF
+		retn
+	}
+}
+
 __declspec(naked) void PositionLoginPassword() {
 	__asm {
 		push 0x0F

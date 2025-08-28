@@ -9,7 +9,7 @@
 void MainFunc() {
 	//NOTE: rewritten functions will kill all direct memory edits and code caves within their memory range
 
-	//Hook_sub_9F9808(true);//not rewritten//sub_9F9808 end 009F9892
+	//Hook_sub_9F_sub_9F9808(true);//not rewritten//sub_9F9808 end 009F9892
 	//Hook_sub_4959B8(true);//not rewritten//sub_4959B8 end 00495A86
 
 	//all virtualized sections(v83, ordered top to bottom based on address):
@@ -91,7 +91,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		//anti-cheat(that you bought from the anti-cheat company) into the exe. or could potentially be used to install miners or kill registry (dont do these last 2)
 		Hook_CreateMutexA(true);//Sleep(42);//not in-game edit //multiclient //ty darter, angel, and alias! //new one: credits to the creators of https://github.com/MapleStory-Archive/MapleClientEditTemplate
 		Hook_WSPStartup(true);//allows to set IP for default installed client//credits to the creators of https://github.com/MapleStory-Archive/MapleClientEditTemplate
-		Hook_CreateWindowExA(true);//not in-game edit//enables minimize button //default ezorsia
+	
 		Hook_FindFirstFileA(true);//kills check for .dll already in dir//ty joo for advice with this, check out their releases: https://github.com/OpenRustMS
 		Hook_GetACP(true);//either kills locale checks or feeds the server custom data//credits to the creators of https://github.com/MapleStory-Archive/MapleClientEditTemplate
 		Hook_GetModuleFileNameW(true);//not in-game edit//better call _GetModuleFileNameW more flexible//default ezorsia
@@ -104,6 +104,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 		//INITWINHOOK("KERNEL32", "GetProcAddress", GetProcAddress_Original, GetProcAddress_t, WinHooks::GetProcAddress_Hook); //Used to map out imports used by MapleStory
 		//INITWINHOOK("NTDLL", "NtTerminateProcess", NtTerminateProcess_Original, NtTerminateProcess_t, WinHooks::NtTerminateProcess_Hook); //We use this function to track what memory addresses are killing the process,There are more ways that Maple kills itself, but this is one of them.
 		
+		
+		Hook_CreateWindowExA(true);//not in-game edit//enables minimize button //default ezorsia
+
+
+
 		DisableThreadLibraryCalls(hModule);
 		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)&MainProc, NULL, 0, 0);
 		break;
@@ -113,6 +118,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReser
 	{
 		MainMain::GetInstance()->~MainMain();
 		break;
-	} }
+	}
+	}
 	return TRUE;
 }

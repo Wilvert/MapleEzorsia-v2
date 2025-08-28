@@ -43,10 +43,10 @@ struct ZException { HRESULT m_hr; };
 //	ZRef<ZSocketBuffer>* _m_pHead;	//size 4
 //	ZRef<ZSocketBuffer>* _m_pTail;	//size 4
 //};
-struct _variant_t2 : tagVARIANT { };
+struct _variant_t2 : tagVARIANT {};
 //section start: ty to bubbling/Bia10 for the definitions/classes in this section; their release is at https://github.com/MapleDevelopers/MaplestoryV95.1
-struct Ztl_variant_t : _variant_t2 { };
-struct Ztl_bstr_t : _bstr_t2 { };
+struct Ztl_variant_t : _variant_t2 {};
+struct Ztl_bstr_t : _bstr_t2 {};
 class ZSyncAutoUnlock
 {
 public:
@@ -94,7 +94,7 @@ struct IUnknownVtbl { //size 12
 	//void* Release;
 };
 struct ILUnknown { IUnknownVtbl* vfptr; }; //size 4
-struct IWzGr2D : ILUnknown { }; //size 4
+struct IWzGr2D : ILUnknown {}; //size 4
 struct _com_ptr_t_com_IIID_IWzGr2D { IWzGr2D* m_pInterface; };
 struct _TypeDescriptor2
 {
@@ -143,11 +143,11 @@ struct CPatchException : CMSException
 };
 struct CRTTI { CRTTI* m_pPrev; };
 struct __declspec(align(1)) FUNCKEY_MAPPED { char nType; int nID; };
-struct IWzSerialize : ILUnknown { };
-struct IWzShape2D : IWzSerialize { };
-struct IWzVector2D : IWzShape2D { };
-struct IWzGr2DLayer : IWzVector2D { };
-struct _com_ptr_t_IWzGr2DLayer_GUID_6dc8c7ce_8e81_4420_b4f6_4b60b7d5fcdf{ IWzGr2DLayer* m_pInterface; };
+struct IWzSerialize : ILUnknown {};
+struct IWzShape2D : IWzSerialize {};
+struct IWzVector2D : IWzShape2D {};
+struct IWzGr2DLayer : IWzVector2D {};
+struct _com_ptr_t_IWzGr2DLayer_GUID_6dc8c7ce_8e81_4420_b4f6_4b60b7d5fcdf { IWzGr2DLayer* m_pInterface; };
 struct __declspec(align(4)) IDraggable : ZRefCounted
 {
 	_com_ptr_t_IWzGr2DLayer_GUID_6dc8c7ce_8e81_4420_b4f6_4b60b7d5fcdf m_pLayer;
@@ -179,7 +179,7 @@ struct IUIMsgHandlerVtbl
 };
 struct IGObj { void* vfptr; }; //IGObjVtbl*
 struct IGObjVtbl { void(__thiscall* Update)(IGObj* pThis); };
-struct CStage : IGObj, IUIMsgHandler, INetMsgHandler, ZRefCounted { }; //#3072
+struct CStage : IGObj, IUIMsgHandler, INetMsgHandler, ZRefCounted {}; //#3072
 //struct tagMSG //size 28
 //{
 //	HWND__* hwnd; //0
@@ -200,20 +200,20 @@ struct CStage : IGObj, IUIMsgHandler, INetMsgHandler, ZRefCounted { }; //#3072
 struct CClientSocket_CONNECTCONTEXT { ZList<ZInetAddr> my_IP_Addresses; void* posList; int bLogin; }; //size 28 //4 bytes dd for voids //__POSITION*
 //struct CClientSocketVtbl { void*(__thiscall* __vecDelDtor)(CClientSocket* pThis, unsigned int); }; //clientsocket definition error? switching to void
 struct CClientSocket {	//singleton		//size 148
-		void* vfptr;//00000000 vfptr dd ? ; offset //size 4
-		HWND__* m_hWnd;//00000004 m_hWnd dd ? ; offset		//size 4
-		ZSocketBase m_sock;//00000008 m_sock ZSocketBase ?	//size 4
-		CClientSocket_CONNECTCONTEXT m_ctxConnect;	//0000000C m_ctxConnect CClientSocket::CONNECTCONTEXT ? //size 28
-		ZInetAddr m_addr;	//00000028 m_addr ZInetAddr ?	//size 16 //4 ints, for IP address
-		DWORD m_tTimeout;//00000038 m_tTimeout dd ?	//size 4
-		ZList<ZRef<ZSocketBuffer>> m_lpRecvBuff;//0000003C m_lpRecvBuff ZList<ZRef<ZSocketBuffer> > ? //size 20
-		ZList<ZRef<ZSocketBuffer>> m_lpSendBuff;//00000050 m_lpSendBuff ZList<ZRef<ZSocketBuffer> > ? //size 20
-		CInPacket m_packetRecv;//00000064 m_packetRecv CInPacket ? //size 24
-		ZFatalSection m_lockSend;//0000007C m_lockSend ZFatalSection ? //size 8
-		unsigned int m_uSeqSnd;//00000084 m_uSeqSnd dd ?	//size 4
-		unsigned int m_uSeqRcv;//00000088 m_uSeqRcv dd ?	//size 4
-		ZXString<char> m_URLGuestIDRegistration;	//0000008C m_URLGuestIDRegistration ZXString<char> ? //size 4
-		int m_bIsGuestID;//00000090 m_bIsGuestID dd ?	//size 4
+	void* vfptr;//00000000 vfptr dd ? ; offset //size 4
+	HWND__* m_hWnd;//00000004 m_hWnd dd ? ; offset		//size 4
+	ZSocketBase m_sock;//00000008 m_sock ZSocketBase ?	//size 4
+	CClientSocket_CONNECTCONTEXT m_ctxConnect;	//0000000C m_ctxConnect CClientSocket::CONNECTCONTEXT ? //size 28
+	ZInetAddr m_addr;	//00000028 m_addr ZInetAddr ?	//size 16 //4 ints, for IP address
+	DWORD m_tTimeout;//00000038 m_tTimeout dd ?	//size 4
+	ZList<ZRef<ZSocketBuffer>> m_lpRecvBuff;//0000003C m_lpRecvBuff ZList<ZRef<ZSocketBuffer> > ? //size 20
+	ZList<ZRef<ZSocketBuffer>> m_lpSendBuff;//00000050 m_lpSendBuff ZList<ZRef<ZSocketBuffer> > ? //size 20
+	CInPacket m_packetRecv;//00000064 m_packetRecv CInPacket ? //size 24
+	ZFatalSection m_lockSend;//0000007C m_lockSend ZFatalSection ? //size 8
+	unsigned int m_uSeqSnd;//00000084 m_uSeqSnd dd ?	//size 4
+	unsigned int m_uSeqRcv;//00000088 m_uSeqRcv dd ?	//size 4
+	ZXString<char> m_URLGuestIDRegistration;	//0000008C m_URLGuestIDRegistration ZXString<char> ? //size 4
+	int m_bIsGuestID;//00000090 m_bIsGuestID dd ?	//size 4
 };//1713	CClientSocket	00000094	Auto	struct __cppobj : TSingleton<CClientSocket> {CClientSocketVtbl *vfptr;HWND__ *m_hWnd;
 //ZSocketBase m_sock;CClientSocket::CONNECTCONTEXT m_ctxConnect;ZInetAddr m_addr;int m_tTimeout;ZList<ZRef<ZSocketBuffer> > m_lpRecvBuff;
 //ZList<ZRef<ZSocketBuffer> > m_lpSendBuff;CInPacket m_packetRecv;ZFatalSection m_lockSend;unsigned int m_uSeqSnd;unsigned int m_uSeqRcv;
@@ -238,7 +238,7 @@ struct CClientSocket {	//singleton		//size 148
 //{
 //	ZRef<CUIStatusBar_CChatLog>* a;
 //};
-struct CUIStatusBar { 
+struct CUIStatusBar {
 	struct CChatLog : ZRefCounted {
 		ZXString<unsigned short> m_sChat;
 		int _ZtlSecureTear_m_nType[2];
@@ -248,7 +248,7 @@ struct CUIStatusBar {
 		int m_bWhisperIcon;
 		int m_bFirstLine;
 		ZRef<void>* m_pItem;//ZRef<GW_ItemSlotBase> m_pItem;
-	}; 
+	};
 };	//fix this //fixed?try?
 struct CWvsApp { //singleton
 	void* vfptr; //0
@@ -307,15 +307,15 @@ typedef void(__fastcall* _CWndCreateWnd_t)(void* pThis, void* edx, int nLeft, in
 static auto _sub_9DE4D2 = reinterpret_cast<_CWndCreateWnd_t>(0x009DE4D2); //thanks you teto for helping me on this learning journey
 static _CWndCreateWnd_t _CWndCreateWnd_Hook = [](void* pThis, void* edx, int nLeft, int nTop, int nWidth, int nHeight, int z, int bScreenCoord, void* esi, int bSetFocus)
 -> void {_sub_9DE4D2(pThis, edx, nLeft, nTop, nWidth, nHeight, z, bScreenCoord, esi, bSetFocus); //changing the values here will modify the result of the function
-						//usually put changes here //this only runs after the original execution
-};
+//usually put changes here //this only runs after the original execution
+	};
 typedef void(__fastcall* _CLoginSendSelectCharPacket_t)(void* pThis, void* edx);    //sub_5F726D    end 005F7690
 static auto _sub_5F726D = reinterpret_cast<_CLoginSendSelectCharPacket_t>(0x005F726D);
 static _CLoginSendSelectCharPacket_t _CLoginSendSelectCharPacket_Hook = [](void* pThis, void* edx)
 -> void {_sub_5F726D(pThis, edx); //changing the values here will modify the result of the function
 //Client::loggedIn = 1;						//usually put changes here
 //Client::UpdateResolution();	//tried to get client to change to different res than login while in main game. failed. this is what's left
-};
+	};
 
 enum RESMAN_PARAM {
 	RC_AUTO_SERIALIZE = 0x1,
@@ -344,23 +344,23 @@ static auto _sub_9F7159 = reinterpret_cast<_CWvsApp__InitializeResMan_t>(0x009F7
 typedef void(__cdecl* _PcCreateObject_IWzResMan_t)(const wchar_t* sUOL, void* pObj, void* pUnkOuter);   //sub_9FAF55    end 009FAFB9
 static auto _sub_9FAF55 = reinterpret_cast<_PcCreateObject_IWzResMan_t>(0x009FAF55);
 static _PcCreateObject_IWzResMan_t _PcCreateObject_IWzResMan_Hook = [](const wchar_t* sUOL, void* pObj, void* pUnkOuters) {
-//-> void {_PcCreateObject_IWzResMan(sUOL, pObj, pUnkOuter); //remove -> part and redefine to replace parts of execution code proper
+	//-> void {_PcCreateObject_IWzResMan(sUOL, pObj, pUnkOuter); //remove -> part and redefine to replace parts of execution code proper
 	_sub_9FAF55(sUOL, pObj, pUnkOuter);
-};
+	};
 
 typedef void(__cdecl* _PcCreateObject_IWzNameSpace_t)(const wchar_t* sUOL, void* pObj, void* pUnkOuter);    //sub_9FAFBA    end 009FB01E
 static auto _sub_9FAFBA = reinterpret_cast<_PcCreateObject_IWzNameSpace_t>(0x009FAFBA);//void __cdecl PcCreateObject(const wchar_t* sUOL, _com_ptr_t<_com_IIID<IWzNameSpace, &_GUID_2aeeeb36_a4e1_4e2b_8f6f_2e7bdec5c53d> > *pObj, IUnknown * pUnkOuter)
 static _PcCreateObject_IWzNameSpace_t _PcCreateObject_IWzNameSpace_Hook = [](const wchar_t* sUOL, void* pObj, void* pUnkOuters) {
-//-> void {_PcCreateObject_IWzNameSpace(sUOL, pObj, pUnkOuter);
+	//-> void {_PcCreateObject_IWzNameSpace(sUOL, pObj, pUnkOuter);
 	_sub_9FAFBA(sUOL, pObj, pUnkOuter);
-};
+	};
 
 typedef void(__cdecl* _PcCreateObject_IWzFileSystem_t)(const wchar_t* sUOL, void* pObj, void* pUnkOuter);   //sub_9FB01F    end 009FB083
 static auto _sub_9FB01F = reinterpret_cast<_PcCreateObject_IWzFileSystem_t>(0x009FB01F);//void __cdecl PcCreateObject(const wchar_t *sUOL, _com_ptr_t<_com_IIID<IWzFileSystem,&_GUID_352d8655_51e4_4668_8ce4_0866e2b6a5b5> > *pObj, IUnknown *pUnkOuter)
 static _PcCreateObject_IWzFileSystem_t _PcCreateObject_IWzFileSystem_Hook = [](const wchar_t* sUOL, void* pObj, void* pUnkOuters) {
-//-> void {_PcCreateObject_IWzFileSystem(sUOL, pObj, pUnkOuter);
+	//-> void {_PcCreateObject_IWzFileSystem(sUOL, pObj, pUnkOuter);
 	_sub_9FB01F(sUOL, pObj, pUnkOuter);
- };
+	};
 
 typedef void(__cdecl* _sub_9FB084_t)(const wchar_t* sUOL, void* pObj, void* pUnkOuter);   //sub_9FB01F    end 009FB083
 static auto _sub_9FB084 = reinterpret_cast<_sub_9FB084_t>(0x009FB084);//9FB084 //void __cdecl PcCreateObject_IWzPackage(const wchar_t *sUOL, ??? *pObj, IUnknown *pUnkOuter)
@@ -377,20 +377,20 @@ static _CWvsApp__Dir_BackSlashToSlash_t _CWvsApp__Dir_BackSlashToSlash_rewrite =
 	}
 	int myLength = strlen(sDir);
 	for (int i = 0; i < myLength; ++i) { if (sDir[i] == '\\') { sDir[i] = '/'; } }
-};
+	};
 
 typedef void(__cdecl* _CWvsApp__Dir_upDir_t)(char* sDir);
 static auto _sub_9F9644 = reinterpret_cast<_CWvsApp__Dir_upDir_t>(0x009F9644);  //sub_9F9644	end 009F9679
 static _CWvsApp__Dir_upDir_t _CWvsApp__Dir_upDir_Hook = [](char* sDir) {
-//-> void {_CWvsApp__Dir_upDir(sDir); 
+	//-> void {_CWvsApp__Dir_upDir(sDir); 
 	_sub_9F9644(sDir); };
 
-typedef void*(__fastcall* _bstr_ctor_t)(void* pThis, void* edx, const char* str); //dont use comutil.h bstr_t, nXXXon's is different   //sub_406301	end	00406356
+typedef void* (__fastcall* _bstr_ctor_t)(void* pThis, void* edx, const char* str); //dont use comutil.h bstr_t, nXXXon's is different   //sub_406301	end	00406356
 static auto _sub_406301 = reinterpret_cast<_bstr_ctor_t>(0x00406301);	//void __thiscall _bstr_t::_bstr_t(_bstr_t *this, const char *s)
 static _bstr_ctor_t _bstr_ctor_Hook = [](void* pThis, void* edx, const char* str) { //can make it return the ptr of inserted val
 	return _sub_406301(pThis, nullptr, str); };
 
-typedef void*(__fastcall* _sub_425ADD_t)(Ztl_bstr_t* pThis, void* edx, const char* str); //can make it return the ptr of inserted val   //sub_425ADD
+typedef void* (__fastcall* _sub_425ADD_t)(Ztl_bstr_t* pThis, void* edx, const char* str); //can make it return the ptr of inserted val   //sub_425ADD
 static auto _sub_425ADD = reinterpret_cast<_sub_425ADD_t>(0x00425ADD);//void __thiscall Ztl_bstr_t::Ztl_bstr_t(Ztl_bstr_t *this, const char *s) //Ztl_bstr_t ctor
 
 //Ztl_bstr_t
@@ -429,7 +429,7 @@ static auto _sub_9F7964 = reinterpret_cast<_IWzFileSystem__Init_t>(0x009F7964);/
 typedef unsigned int(__thiscall* _sub_402EA5_t)(_bstr_t__Data_t* pThis);
 static auto _sub_402EA5 = reinterpret_cast<_sub_402EA5_t>(0x00402EA5);//unsigned int __thiscall _bstr_t::Data_t::Release(_bstr_t::Data_t *this)
 
-typedef void*(__thiscall* _sub_4039AC_t)(Ztl_variant_t* pvargDest, Ztl_variant_t* pvargSrc, char a3);//could be wrong
+typedef void* (__thiscall* _sub_4039AC_t)(Ztl_variant_t* pvargDest, Ztl_variant_t* pvargSrc, char a3);//could be wrong
 static auto _sub_4039AC = reinterpret_cast<_sub_4039AC_t>(0x004039AC);//non-existent func in v95//int __thiscall sub_4039AC(VARIANTARG *pvargDest, VARIANTARG *pvargSrc, char)
 
 auto _unk_BE2EC0 = (_GUID*)0x00BE2EC0;//GUID _GUID_352d8655_51e4_4668_8ce4_0866e2b6a5b5
@@ -438,14 +438,14 @@ auto _unk_BD8F28 = (_GUID*)0x00BD8F28;//GUID _GUID_2aeeeb36_a4e1_4e2b_8f6f_2e7bd
 typedef HRESULT(__fastcall* _IWzNameSpace__Mount_t)(void* pThis, void* edx, Ztl_bstr_t sPath, void* pDown, int nPriority); //HRESULT
 static auto _sub_9F790A = reinterpret_cast<_IWzNameSpace__Mount_t>(0x009F790A);    //sub_9F790A	//HRESULT __thiscall IWzNameSpace::Mount(IWzNameSpace *this, Ztl_bstr_t sPath, IWzNameSpace *pDown, int nPriority)
 static _IWzNameSpace__Mount_t _IWzNameSpace__Mount_Hook = [](void* pThis, void* edx, Ztl_bstr_t sPath, void* pDown, int nPriority) {
-//-> HRESULT {_IWzNameSpace__Mount(pThis, edx, sPath, pDown, nPriority); //HRESULT //return _IWzNameSpace__Mount(pThis, edx, sPath, pDown, nPriority);
+	//-> HRESULT {_IWzNameSpace__Mount(pThis, edx, sPath, pDown, nPriority); //HRESULT //return _IWzNameSpace__Mount(pThis, edx, sPath, pDown, nPriority);
 	return _sub_9F790A(pThis, nullptr, sPath, pDown, nPriority);
-};
+	};
 
-typedef Ztl_variant_t*(__fastcall* _sub_5D995B_t)(void* pThis, void* edx, Ztl_variant_t* result, Ztl_bstr_t sPath);
+typedef Ztl_variant_t* (__fastcall* _sub_5D995B_t)(void* pThis, void* edx, Ztl_variant_t* result, Ztl_bstr_t sPath);
 static auto _sub_5D995B = reinterpret_cast<_sub_5D995B_t>(0x005D995B);//_sub_5D995B//Ztl_variant_t *__thiscall IWzNameSpace::Getitem(IWzNameSpace *this, Ztl_variant_t *result, Ztl_bstr_t sPath)
 
-typedef IUnknown*(__fastcall* _sub_4032B2_t)(Ztl_variant_t* pThis, void* edx, bool fAddRef, bool fTryChangeType);
+typedef IUnknown* (__fastcall* _sub_4032B2_t)(Ztl_variant_t* pThis, void* edx, bool fAddRef, bool fTryChangeType);
 static auto _sub_4032B2 = reinterpret_cast<_sub_4032B2_t>(0x004032B2);//IUnknown* __thiscall Ztl_variant_t::GetUnknown(Ztl_variant_t* this, bool fAddRef, bool fTryChangeType)
 
 typedef void(__fastcall* _sub_9FCD88_t)(void* pThis, void* edx, IUnknown* p);
@@ -454,7 +454,7 @@ static auto _sub_9FCD88 = reinterpret_cast<_sub_9FCD88_t>(0x009FCD88);//sub_9FCD
 typedef ZXString<char>* (__fastcall* _StringPool__GetString_t)(void* pThis, void* edx, ZXString<char>* result, unsigned int nIdx, char formal); //also ty to the creators of MapleClientEditTemplate
 static auto _sub_79E993 = reinterpret_cast<_StringPool__GetString_t>(0x0079E993);//hook stringpool modification //ty !! popcorn //ty darter //ty teto
 
-typedef unsigned int*(__fastcall* _sub_78C8A6_t)(unsigned int[], void* edx);  //sub_78C8A6	end 0078D165	//custom return
+typedef unsigned int* (__fastcall* _sub_78C8A6_t)(unsigned int[], void* edx);  //sub_78C8A6	end 0078D165	//custom return
 static auto _sub_78C8A6 = reinterpret_cast<_sub_78C8A6_t>(0x0078C8A6); //void __thiscall NEXTLEVEL::NEXTLEVEL(NEXTLEVEL *this)
 
 //__thiscall CUIStatusBar::ChatLogAdd(CUIStatusBar *this, const char *sChat, int lType, int nChannelID, int bWhisperIcon, ZRef<GW_ItemSlotBase> pItem)
@@ -473,7 +473,7 @@ static _CUIStatusBar__ChatLogAdd_t _CUIStatusBar__ChatLogAdd_Hook = [](void* pTh
 		m_aChatLog->RemoveAt(idx);
 	}
 	_sub_8DB070(pThis, nullptr, sChat, lType, nChannelID, bWhisperIcon, pItem);
-};
+	};
 
 typedef int(__cdecl* _sub_44E6C3_t)(int a1, unsigned int a2);
 static auto _sub_44E6C3 = reinterpret_cast<_sub_44E6C3_t>(0x0044E6C3);
@@ -481,7 +481,7 @@ static auto _sub_44E6C3 = reinterpret_cast<_sub_44E6C3_t>(0x0044E6C3);
 typedef unsigned int(__cdecl* _sub_44E546_t)(unsigned __int8* a1, int a2);	//sub_44E546	end 0044E5D4
 static auto _sub_44E546 = reinterpret_cast<_sub_44E546_t>(0x0044E546);
 
-typedef unsigned int(__cdecl* _sub_44E5D5_t)(int a1, void *a2, size_t a3);	//1	//sub_44E5D5	end	0044E6C2
+typedef unsigned int(__cdecl* _sub_44E5D5_t)(int a1, void* a2, size_t a3);	//1	//sub_44E5D5	end	0044E6C2
 static auto _sub_44E5D5 = reinterpret_cast<_sub_44E5D5_t>(0x0044E5D5);	//3
 
 typedef void(__cdecl* _sub_A61DF2_t)(void* lpMem);//void __cdecl free(void *)
@@ -490,16 +490,16 @@ static auto _sub_A61DF2 = reinterpret_cast<_sub_A61DF2_t>(0x00A61DF2);
 typedef unsigned int(__cdecl* _sub_44E716_t)(int a1, void* a2, size_t a3);	//sub_44E716	end 0044E822
 static auto _sub_44E716 = reinterpret_cast<_sub_44E716_t>(0x0044E716);
 
-typedef int(__stdcall*(__stdcall* _sub_44E88E_t)(HINSTANCE__* hModule, const char* lpProcName))();	//sub_44E88E	end	0044EA61	//GetProcAddress function (libloaderapi.h), not sure if nXXXon changed it
+typedef int(__stdcall* (__stdcall* _sub_44E88E_t)(HINSTANCE__* hModule, const char* lpProcName))();	//sub_44E88E	end	0044EA61	//GetProcAddress function (libloaderapi.h), not sure if nXXXon changed it
 static auto _sub_44E88E = reinterpret_cast<_sub_44E88E_t>(0x0044E88E);//int (__stdcall *__stdcall MyGetProcAddress(HINSTANCE__ *hModule, const char *lpProcName))()
 
 typedef HMODULE(__fastcall* _sub_44EA64_t)(void* pThis, void* edx);	//sub_44EA64	end	0044EBEB
 static auto _sub_44EA64 = reinterpret_cast<_sub_44EA64_t>(0x0044EA64);
 
-typedef DWORD*(__cdecl* _sub_44EC9C_t)(int a1);	//1	//sub_44EC9C	end	0044ED46
+typedef DWORD* (__cdecl* _sub_44EC9C_t)(int a1);	//1	//sub_44EC9C	end	0044ED46
 static auto _sub_44EC9C = reinterpret_cast<_sub_44EC9C_t>(0x0044EC9C);	//3	//HideDll
 
-typedef void*(__thiscall* _sub_403065_t)(ZAllocEx<ZAllocAnonSelector>* pThis, unsigned int uSize);
+typedef void* (__thiscall* _sub_403065_t)(ZAllocEx<ZAllocAnonSelector>* pThis, unsigned int uSize);
 static auto _sub_403065 = reinterpret_cast<_sub_403065_t>(0x00403065);	//void *__thiscall ZAllocEx<ZAllocAnonSelector>::Alloc(ZAllocEx<ZAllocAnonSelector> *this, unsigned int uSize)
 
 typedef void(__thiscall* _sub_4031ED_t)(ZAllocEx<ZAllocAnonSelector>* pThis, DWORD* a2);	//ZAllocEx<ZAllocAnonSelector>::Free
@@ -511,19 +511,19 @@ static auto _sub_44ED47 = reinterpret_cast<_sub_44ED47_t>(0x0044ED47);//void __c
 //ZAllocEx<ZAllocAnonSelector>* _unk_BF0B00 = reinterpret_cast<ZAllocEx<ZAllocAnonSelector>*>(0x00BF0B00);	//ZAllocEx<class ZAllocAnonSelector> ZAllocEx<class ZAllocAnonSelector>::_s_alloc
 auto _unk_BF0B00 = (ZAllocEx<ZAllocAnonSelector>*)0x00BF0B00; //_unk_BF0B00 = ZAllocEx<ZAllocAnonSelector> ZAllocEx<ZAllocAnonSelector>::_s_alloc
 
-typedef DWORD*(__thiscall* _sub_496ADF_t)(DWORD* pThis);
+typedef DWORD* (__thiscall* _sub_496ADF_t)(DWORD* pThis);
 static auto _sub_496ADF = reinterpret_cast<_sub_496ADF_t>(0x00496ADF);	//3
 
-typedef ZXString<char>*(__thiscall* _sub_9F94A1_t)(CWvsApp* pThis, ZXString<char>* result, int nArg);
+typedef ZXString<char>* (__thiscall* _sub_9F94A1_t)(CWvsApp* pThis, ZXString<char>* result, int nArg);
 static auto _sub_9F94A1 = reinterpret_cast<_sub_9F94A1_t>(0x009F94A1);//ZXString<char> *__thiscall CWvsApp::GetCmdLine(CWvsApp *this, ZXString<char> *result, int nArg)
 
 typedef int(__thiscall* _sub_496E9F_t)(DWORD* pThis);
 static auto _sub_496E9F = reinterpret_cast<_sub_496E9F_t>(0x00496E9F);	//3
 
-typedef DWORD*(__thiscall* _sub_494C1A_t)(DWORD* pThis, char* cp, unsigned short netshort);
+typedef DWORD* (__thiscall* _sub_494C1A_t)(DWORD* pThis, char* cp, unsigned short netshort);
 static auto _sub_494C1A = reinterpret_cast<_sub_494C1A_t>(0x00494C1A);	//3
 
-typedef DWORD*(__thiscall* _sub_494BE9_t)(void* pThis, int a2);
+typedef DWORD* (__thiscall* _sub_494BE9_t)(void* pThis, int a2);
 static auto _sub_494BE9 = reinterpret_cast<_sub_494BE9_t>(0x00494BE9);	//3
 
 //sub_00474C2E = ZArray<long>::InsertBefore(_DWORD * this, int a2)
@@ -554,7 +554,7 @@ static auto _sub_494857 = reinterpret_cast<_sub_494857_t>(0x00494857);	//switchi
 typedef void(__thiscall* _sub_496369_t)(CClientSocket* pThis);  //CClientSocket::Close	//CClientSocket* pThis
 static auto _sub_496369 = reinterpret_cast<_sub_496369_t>(0x00496369);	//3
 
-typedef ZSocketBuffer*(__cdecl* _sub_495FD2_t)(unsigned int u);	//ZSocketBuffer::Alloc(unsigned int u)
+typedef ZSocketBuffer* (__cdecl* _sub_495FD2_t)(unsigned int u);	//ZSocketBuffer::Alloc(unsigned int u)
 static auto _sub_495FD2 = reinterpret_cast<_sub_495FD2_t>(0x00495FD2);	//3
 
 typedef void(__thiscall* _sub_496C2B_t)(void* pThis);	//__thiscall ZRef<ZSocketBuffer>::~ZRef<ZSocketBuffer>(ZRef<ZSocketBuffer> *this)
@@ -581,7 +581,7 @@ static auto _sub_51E834 = reinterpret_cast<_sub_51E834_t>(0x0051E834);
 char* _byte_BF1AD0 = reinterpret_cast<char*>(0x00BF0B00); //??
 char* _byte_BF1ACF = reinterpret_cast<char*>(0x00BF1ACF); //??
 auto _sub_9F9621 = (void(__cdecl*)(char*))0x009F9621;//void __cdecl CWvsApp::Dir_SlashToBackSlash(char *sDir)
-auto _sub_406455 = (void*(__thiscall*)(void* pThis, ZXString<char>* result, unsigned int nIdx))0x00406455;
+auto _sub_406455 = (void* (__thiscall*)(void* pThis, ZXString<char>*result, unsigned int nIdx))0x00406455;
 auto _sub_79E805 = (int(__fastcall*)())0x0079E805; //??
 auto _dword_BF03BC = (int(__stdcall*)(DWORD))0x00BF03BC;//redefine/change to microsoft version
 auto _dword_BF039C = (int(__stdcall*)(DWORD, DWORD, DWORD))0x00BF039C;//redefine/change to microsoft version
@@ -597,9 +597,9 @@ const DWORD dw_sub_9F9808 = 0x009F9808;
 //		return call dw_sub_9F9808
 //	}
 //}
-typedef const char*(__cdecl* _sub_9F9808_t)(void);	//const char* __cdecl CWvsApp::GetExceptionFileName()
+typedef const char* (__cdecl* _sub_9F9808_t)(void);	//const char* __cdecl CWvsApp::GetExceptionFileName()
 static auto _sub_9F9808 = reinterpret_cast<_sub_9F9808_t>(dw_sub_9F9808);//sub_9F9808 end 009F9892
- //__stdcall func_hook_payload(int a, for__usercall func<eax>(int a<eax>,
+//__stdcall func_hook_payload(int a, for__usercall func<eax>(int a<eax>,
 
 typedef int(__thiscall* _sub_495704_t)(DWORD* pThis, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 static auto _sub_495704 = reinterpret_cast<_sub_495704_t>(0x00495704);
@@ -610,7 +610,7 @@ static auto _sub_49588D = reinterpret_cast<_sub_49588D_t>(0x0049588D);
 typedef void(__thiscall* _sub_49637B_t)(CClientSocket* pThis, void* oPacket);	//CClientSocket::SendPacket	//const struct COutPacket* a2
 static auto _sub_49637B = reinterpret_cast<_sub_49637B_t>(0x0049637B);	////CClientSocket* pThis //checks the return address, might not be able to be used in rewrites
 
-typedef void*(__thiscall* _sub_46C00C_t)(DWORD* pThis, void* a2, size_t a3);	//COutPacket::EncodeBuffer
+typedef void* (__thiscall* _sub_46C00C_t)(DWORD* pThis, void* a2, size_t a3);	//COutPacket::EncodeBuffer
 static auto _sub_46C00C = reinterpret_cast<_sub_46C00C_t>(0x0046C00C);
 
 typedef signed int(__thiscall* _sub_4956A6_t)(DWORD* pThis);
@@ -661,8 +661,8 @@ auto _dword_BF0358 = (int(__thiscall*)(DWORD, DWORD, DWORD, DWORD, void*, DWORD)
 typedef char* (__thiscall* _sub_496CA9_t)(ZArray<unsigned char>* pThis, unsigned int u);	//char *__thiscall ZArray<unsigned char>::_Alloc(ZArray<unsigned char> *this, unsigned int u, ZAllocHelper *_ALLOC)
 static auto _sub_496CA9 = reinterpret_cast<_sub_496CA9_t>(0x00496CA9);
 
-auto _sub_6EC9CE = (DWORD*(__thiscall*)(DWORD* pThis, int a2))0x006EC9CE;	//COutPacket *__thiscall COutPacket::COutPacket(COutPacket *this, int a2)
-auto _sub_427F74 = (int(__thiscall*)(DWORD* pThis, unsigned __int16 a2))0x00427F74;	//int __thiscall COutPacket::Encode2(COutPacket *this, unsigned __int16 a2)
+auto _sub_6EC9CE = (DWORD * (__thiscall*)(DWORD * pThis, int a2))0x006EC9CE;	//COutPacket *__thiscall COutPacket::COutPacket(COutPacket *this, int a2)
+auto _sub_427F74 = (int(__thiscall*)(DWORD * pThis, unsigned __int16 a2))0x00427F74;	//int __thiscall COutPacket::Encode2(COutPacket *this, unsigned __int16 a2)
 auto _sub_428CF1 = (void(__thiscall*)(DWORD * pThis))0x00428CF1;	//void __thiscall ZArray<unsigned char>::RemoveAll(_DWORD *this)
 auto _dword_BF0370 = (int(__stdcall*)(DWORD))0x00BF0370;//redefine/change to microsoft version
 auto _dword_BE7918 = (ZXString<char>*)0x00BE7918; //ZXString<char> TSingleton<CWvsContext>::ms_pInstance
@@ -680,7 +680,7 @@ auto _TI3_AVCTerminateException__ = (_s__ThrowInfo2*)0x00B44760;
 auto _TI3_AVCDisconnectException__ = (_s__ThrowInfo2*)0x00B48858;
 auto _TI3_AVCPatchException__ = (_s__ThrowInfo2*)0x00B52FC8;
 
-typedef unsigned int(__stdcall*_dword_BF060C_t)();	// unsigned int (__stdcall *timeGetTime)(); //IDB wrong
+typedef unsigned int(__stdcall* _dword_BF060C_t)();	// unsigned int (__stdcall *timeGetTime)(); //IDB wrong
 static auto _dword_BF060C = reinterpret_cast<_dword_BF060C_t>(0x00BF060C);//!!use microsoft version
 
 typedef SOCKET(__stdcall* _dword_AF036C_t)(int, int, int);	//SOCKET __stdcall socket(int af, int type, int protocol)
@@ -692,7 +692,7 @@ static auto _dword_AF0364 = reinterpret_cast<_dword_AF0364_t>(0x00AF0364);//!!us
 typedef int(__stdcall* _dword_BF0640_t)(void);	//ZAPI.WSAGetLastError() 2?	//C6DB18
 static auto _dword_BF0640 = reinterpret_cast<_dword_BF0640_t>(0x00BF0640);//!!use microsoft version
 
-typedef HWND__*(__stdcall* _dword_BF0448_t)(void);	// HWND__ *(__stdcall *GetDesktopWindow)();
+typedef HWND__* (__stdcall* _dword_BF0448_t)(void);	// HWND__ *(__stdcall *GetDesktopWindow)();
 static auto _dword_BF0448 = reinterpret_cast<_dword_BF0448_t>(0x00BF0448);//!!use microsoft version
 
 typedef int(__stdcall* _dword_BF0444_t)(HWND__*);	//int (__stdcall *GetWindowRect)(HWND__ *, tagRECT *);
@@ -719,7 +719,7 @@ static auto _dword_BF041C = reinterpret_cast<_dword_BF041C_t>(0x00BF041C);//!!us
 typedef int(__stdcall* _dword_BF064C_t)(unsigned int, const void*, int);//  int (__stdcall *connect)(unsigned int, const void *, int);
 static auto _dword_BF064C = reinterpret_cast<_dword_BF064C_t>(0x00BF064C);//!!use microsoft version
 //probably a easier way of writing it if dont need the type def		////ZAPI.recv	//!!use microsoft version
-int(__stdcall* _dword_BF0674)(unsigned int, const char*, int, int)  = reinterpret_cast<int(__stdcall*)(unsigned int, const char*, int, int)>(0x00BF0674);
+int(__stdcall* _dword_BF0674)(unsigned int, const char*, int, int) = reinterpret_cast<int(__stdcall*)(unsigned int, const char*, int, int)>(0x00BF0674);
 //change back to * from **. it does look to be pointers from uninitialized functions, but those should "probably" work like normal functions on runtime
 typedef int(__stdcall* _dword_BF062C_t)(unsigned int, HWND__*, unsigned int, int);//  int (__stdcall *WSAAsyncSelect)(unsigned int, HWND__ *, unsigned int, int);
 static auto _dword_BF062C = reinterpret_cast<_dword_BF062C_t>(0x00BF062C);//!!use microsoft version
@@ -764,7 +764,7 @@ static auto _sub_9F821F = reinterpret_cast<_sub_9F821F_t>(0x009F821F); //CInputS
 typedef void(__thiscall* _sub_599EBF_t)(void* pThis, HWND__* hWnd, void** ahEvent);//void __thiscall CInputSystem::Init(CInputSystem *this, HWND__ *hWnd, void **ahEvent)
 static auto _sub_599EBF = reinterpret_cast<_sub_599EBF_t>(0x00599EBF); //CInputSystem* pThis //void** ahEvent
 
-typedef void*(__cdecl* _sub_9F9A6A_t)();//CInputSystem *__cdecl TSingleton<CInputSystem>::GetInstance()
+typedef void* (__cdecl* _sub_9F9A6A_t)();//CInputSystem *__cdecl TSingleton<CInputSystem>::GetInstance()
 static auto _sub_9F9A6A = reinterpret_cast<_sub_9F9A6A_t>(0x009F9A6A); //CInputSystem* pThis
 
 typedef void(__fastcall* _sub_9F84D0_t)(CWvsApp* pThis, void* edx, int tCurTime);	//sub_9F84D0 end 009F8B5E
@@ -817,7 +817,7 @@ static auto _sub_44E824 = reinterpret_cast<_sub_44E824_t>(0x0044E824);
 auto _dword_BEC3A8 = (void*)0x00BEC3A8; //CSecurityClient* TSingleton<CSecurityClient>::ms_pInstance
 auto _dword_BF1AC8 = (int*)0x00BF1AC8; //TSingleton<CConfig>::GetInstance()->m_sysOpt.bSysOpt_WindowedMode;
 
-typedef void*(__cdecl* _sub_9F9F42_t)();//CSecurityClient *__cdecl TSingleton<CSecurityClient>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9F42_t)();//CSecurityClient *__cdecl TSingleton<CSecurityClient>::CreateInstance()
 static auto _sub_9F9F42 = reinterpret_cast<_sub_9F9F42_t>(0x009F9F42);
 
 typedef void(__thiscall* _sub_9F6D77_t)(CWvsApp* pThis);//void __thiscall CWvsApp::InitializePCOM(CWvsApp *this)
@@ -826,19 +826,19 @@ static auto _sub_9F6D77 = reinterpret_cast<_sub_9F6D77_t>(0x009F6D77);
 typedef void(__thiscall* _sub_9F6D97_t)(CWvsApp* pThis);//void __thiscall CWvsApp::CreateMainWindow(CWvsApp *this)
 static auto _sub_9F6D97 = reinterpret_cast<_sub_9F6D97_t>(0x009F6D97);
 
-typedef CClientSocket*(__cdecl* _sub_9F9E53_t)();//CClientSocket *__cdecl TSingleton<CClientSocket>::CreateInstance()
+typedef CClientSocket* (__cdecl* _sub_9F9E53_t)();//CClientSocket *__cdecl TSingleton<CClientSocket>::CreateInstance()
 static auto _sub_9F9E53 = reinterpret_cast<_sub_9F9E53_t>(0x009F9E53);
 
 typedef void(__thiscall* _sub_9F6F27_t)(CWvsApp* pThis);//void __thiscall CWvsApp::ConnectLogin(CWvsApp *this)
-static auto _sub_9F6F27= reinterpret_cast<_sub_9F6F27_t>(0x009F6F27);
+static auto _sub_9F6F27 = reinterpret_cast<_sub_9F6F27_t>(0x009F6F27);
 
-typedef void*(__cdecl* _sub_9F9E98_t)();//CFuncKeyMappedMan *__cdecl TSingleton<CFuncKeyMappedMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9E98_t)();//CFuncKeyMappedMan *__cdecl TSingleton<CFuncKeyMappedMan>::CreateInstance()
 static auto _sub_9F9E98 = reinterpret_cast<_sub_9F9E98_t>(0x009F9E98);
 
-typedef void*(__cdecl* _sub_9FA0CB_t)();//CQuickslotKeyMappedMan *__cdecl TSingleton<CQuickslotKeyMappedMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9FA0CB_t)();//CQuickslotKeyMappedMan *__cdecl TSingleton<CQuickslotKeyMappedMan>::CreateInstance()
 static auto _sub_9FA0CB = reinterpret_cast<_sub_9FA0CB_t>(0x009FA0CB);
 
-typedef void*(__cdecl* _sub_9F9EEE_t)();//CMacroSysMan *__cdecl TSingleton<CMacroSysMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9EEE_t)();//CMacroSysMan *__cdecl TSingleton<CMacroSysMan>::CreateInstance()
 static auto _sub_9F9EEE = reinterpret_cast<_sub_9F9EEE_t>(0x009F9EEE);
 
 typedef void(__thiscall* _sub_9F7159_t)(CWvsApp* pThis);//void __thiscall CWvsApp::InitializeResMan(CWvsApp *this)
@@ -856,28 +856,28 @@ static auto _sub_9F8B61 = reinterpret_cast<_sub_9F8B61_t>(0x009F8B61);
 typedef void(__thiscall* _sub_9F7034_t)(CWvsApp* pThis);//void __thiscall CWvsApp::CreateWndManager(CWvsApp *this)
 static auto _sub_9F7034 = reinterpret_cast<_sub_9F7034_t>(0x009F7034);
 
-typedef void*(__cdecl* _sub_538C98_t)();//CConfig *__cdecl TSingleton<CConfig>::GetInstance()
+typedef void* (__cdecl* _sub_538C98_t)();//CConfig *__cdecl TSingleton<CConfig>::GetInstance()
 static auto _sub_538C98 = reinterpret_cast<_sub_538C98_t>(0x00538C98);
 
 typedef void(__thiscall* _sub_49EA33_t)(void* pThis, void* pSysOpt, int bApplyVideo);//void __thiscall CConfig::ApplySysOpt(CConfig *this, CONFIG_SYSOPT *pSysOpt, int bApplyVideo)
 static auto _sub_49EA33 = reinterpret_cast<_sub_49EA33_t>(0x0049EA33);
 
-typedef void*(__cdecl* _sub_9F9DA6_t)();//CActionMan *__cdecl TSingleton<CActionMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9DA6_t)();//CActionMan *__cdecl TSingleton<CActionMan>::CreateInstance()
 static auto _sub_9F9DA6 = reinterpret_cast<_sub_9F9DA6_t>(0x009F9DA6);
 
 typedef void(__thiscall* _sub_406ABD_t)(void* pThis);//void __thiscall CActionMan::Init(CActionMan *this)
 static auto _sub_406ABD = reinterpret_cast<_sub_406ABD_t>(0x00406ABD);
 
-typedef void*(__cdecl* _sub_9F9DFC_t)();//CAnimationDisplayer *__cdecl TSingleton<CAnimationDisplayer>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9DFC_t)();//CAnimationDisplayer *__cdecl TSingleton<CAnimationDisplayer>::CreateInstance()
 static auto _sub_9F9DFC = reinterpret_cast<_sub_9F9DFC_t>(0x009F9DFC);
 
-typedef void*(__cdecl* _sub_9F9F87_t)();//CMapleTVMan *__cdecl TSingleton<CMapleTVMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9F87_t)();//CMapleTVMan *__cdecl TSingleton<CMapleTVMan>::CreateInstance()
 static auto _sub_9F9F87 = reinterpret_cast<_sub_9F9F87_t>(0x009F9F87);
 
 typedef void(__thiscall* _sub_636F4E_t)(void* pThis);//void __thiscall CMapleTVMan::Init(CMapleTVMan *this)
 static auto _sub_636F4E = reinterpret_cast<_sub_636F4E_t>(0x00636F4E);
 
-typedef void*(__cdecl* _sub_9F9AC2_t)();//CQuestMan *__cdecl TSingleton<CQuestMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9AC2_t)();//CQuestMan *__cdecl TSingleton<CQuestMan>::CreateInstance()
 static auto _sub_9F9AC2 = reinterpret_cast<_sub_9F9AC2_t>(0x009F9AC2);
 
 typedef int(__thiscall* _sub_71D8DF_t)(void* pThis);//int __thiscall CQuestMan::LoadDemand(CQuestMan *this)
@@ -889,13 +889,13 @@ static auto _sub_723341 = reinterpret_cast<_sub_723341_t>(0x00723341);
 typedef void(__thiscall* _sub_7247A1_t)(void* pThis);//void __thiscall CQuestMan::LoadExclusive(CQuestMan *this)
 static auto _sub_7247A1 = reinterpret_cast<_sub_7247A1_t>(0x007247A1);
 
-typedef void*(__cdecl* _sub_9F9B73_t)();//CMonsterBookMan *__cdecl TSingleton<CMonsterBookMan>::CreateInstance()
+typedef void* (__cdecl* _sub_9F9B73_t)();//CMonsterBookMan *__cdecl TSingleton<CMonsterBookMan>::CreateInstance()
 static auto _sub_9F9B73 = reinterpret_cast<_sub_9F9B73_t>(0x009F9B73);
 
 typedef int(__thiscall* _sub_68487C_t)(void* pThis);//int __thiscall CMonsterBookMan::LoadBook(CMonsterBookMan *this)
 static auto _sub_68487C = reinterpret_cast<_sub_68487C_t>(0x0068487C);
 
-typedef void*(__cdecl* _sub_9FA078_t)();//CRadioManager *__cdecl TSingleton<CRadioManager>::CreateInstance()
+typedef void* (__cdecl* _sub_9FA078_t)();//CRadioManager *__cdecl TSingleton<CRadioManager>::CreateInstance()
 static auto _sub_9FA078 = reinterpret_cast<_sub_9FA078_t>(0x009FA078);
 
 typedef void(__thiscall* _sub_414617_t)(ZXString<char>* pThis, const char* s, int n);//void __thiscall ZXString<char>::Assign(ZXString<char> *this, const char *s, int n)
@@ -953,10 +953,10 @@ auto _dword_BF6B44 = (ZXString<char>*)0x00BF6B44;//ZXString<char> ZXString<char>
 auto _dword_BF02B4 = (unsigned int(__stdcall*)())0x00BF02B4;//!!use microsoft version//unsigned int (__stdcall *GetCurrentThreadId)();
 auto _dword_BF03E4 = (int(__stdcall*)(_OSVERSIONINFOA*))0x00BF03E4;//!!use microsoft version//int (__stdcall *GetVersionExA)(_OSVERSIONINFOA *);
 
-typedef ZXString<char>*(__thiscall* _sub_4744C9_t)(ZXString<char>* pThis, const char* sWhiteSpaceSet);//ZXString<char> *__thiscall ZXString<char>::TrimLeft(ZXString<char> *this, const char *sWhiteSpaceSet)
+typedef ZXString<char>* (__thiscall* _sub_4744C9_t)(ZXString<char>* pThis, const char* sWhiteSpaceSet);//ZXString<char> *__thiscall ZXString<char>::TrimLeft(ZXString<char> *this, const char *sWhiteSpaceSet)
 static auto _sub_4744C9 = reinterpret_cast<_sub_4744C9_t>(0x004744C9);
- 
-typedef ZXString<char>*(__thiscall* _sub_474414_t)(ZXString<char>* pThis, const char* sWhiteSpaceSet);//ZXString<char> *__thiscall ZXString<char>::TrimRight(ZXString<char> *this, const char *sWhiteSpaceSet)
+
+typedef ZXString<char>* (__thiscall* _sub_474414_t)(ZXString<char>* pThis, const char* sWhiteSpaceSet);//ZXString<char> *__thiscall ZXString<char>::TrimRight(ZXString<char> *this, const char *sWhiteSpaceSet)
 static auto _sub_474414 = reinterpret_cast<_sub_474414_t>(0x00474414);
 
 typedef HANDLE(WINAPI* FindFirstFileA_t)(LPCSTR lpFileName, LPWIN32_FIND_DATAA lpFindFileData);
