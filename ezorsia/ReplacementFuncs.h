@@ -467,6 +467,9 @@ _StringPool__GetString_t _StringPool__GetString_rewrite = [](void* pThis, void* 
 			//	if (EzorsiaV2WzIncluded && ownCashShopFrame) { *ret = ("MapleEzorsiaV2wzfiles.img/Base/backgrnd1"); } break;
 			//case 5361:	//SP_1937_UI_UIWINDOWIMG_STAT_BACKGRND2  = 791h	
 			//	if (EzorsiaV2WzIncluded && ownCashShopFrame) { *ret = ("MapleEzorsiaV2wzfiles.img/Base/backgrnd2"); } break;
+		case 5527:
+			const char* dFont = Client::dFont.c_str();
+			*ret = (dFont); break;
 		}
 		return ret;
 	};

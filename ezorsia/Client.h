@@ -11,6 +11,7 @@ public:
 	static int m_nGameWidth;
 	static int MsgAmount;
 	static bool WindowedMode;
+	static std::string dFont;
 	static bool RemoveLogos;
 	static double setDamageCap;
 	static bool useTubi;

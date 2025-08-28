@@ -102,6 +102,7 @@ MainMain::MainMain(std::function<void()> pPostMutexFunc)
 	Client::m_nGameHeight = reader.GetInteger("general", "height", 720);
 	Client::MsgAmount = reader.GetInteger("general", "MsgAmount", 26);
 	Client::WindowedMode = reader.GetBoolean("general", "WindowedMode", true);
+	Client::dFont = reader.Get("general", "Font", "Arial");
 	Client::RemoveLogos = reader.GetBoolean("general", "RemoveLogos", true);
 	Client::setDamageCap = reader.GetReal("optional", "setDamageCap", 199999.0);
 	Client::useTubi = reader.GetBoolean("optional", "useTubi", false);

@@ -6,6 +6,7 @@ int Client::m_nGameHeight = 720;
 int Client::m_nGameWidth = 1280;
 int Client::MsgAmount = 26;
 bool Client::WindowedMode = true;
+std::string Client::dFont = "Arial"; // GMS83 default font
 bool Client::RemoveLogos = true;
 double Client::setDamageCap = 199999.0;
 bool Client::useTubi = false;
@@ -129,6 +130,10 @@ void Client::UpdateGameStartup() {
 	// Allow PIC to be Typed - General
 	Memory::FillBytes(0x0076F7DE, 0x90, 6);
 
+	// Jump Attack Mage / Shoot > credits Teto on discord
+	Memory::WriteByte(0x009539FA, 0xEB); // jnz -> jmp
+	Memory::WriteByte(0x009559E5, 0xEB); // jnz -> jmp
+
 	// Remove SP Checks Between Jobs - General
 	Memory::WriteByte(0x008AD01A, 0xE9);
 	Memory::WriteValue(0x008AD01A + 1, 0x008AD227 - (0x008AD01A + 5));
@@ -224,6 +229,29 @@ void Client::UpdateGameStartup() {
 	Memory::CodeCave(sDefaultQuickslotKeyMap_cave, 0x72B7BC, 5);
 	Memory::CodeCave(DefaultQuickslotKeyMap_cave, 0x72B8E6, 5);
 	//Memory::CodeCave(Restore_Array_Expanded, 0x008CFDFD, 6); //restores the skill array to 0s
+
+	// Draw Icons in Trunk Inv
+	Memory::WriteByte(0x007C7C27 + 3, 0xC9);
+	// Draw Tooltips in Trunk Inv
+	Memory::WriteByte(0x007C82C3 + 3, 0xBF);
+	// Draw Icons in Player inv
+	Memory::WriteByte(0x007C8035 + 3, 0xC9);
+	// Draw Tooltips in Plaer Inv
+	Memory::WriteByte(0x007C8385 + 3, 0xBF);
+	// Storage Meso Button Y
+	Memory::WriteByte(0x007C65B6 + 1, 0xC6);
+	// Player Meso Button 
+	Memory::WriteByte(0x007C6631 + 1, 0xC6);
+	// Player and Merchant Mesos Y offset
+	Memory::WriteByte(0x007C8197 + 1, 0xC8);
+	//Merchant Scrollbar Length
+	Memory::WriteByte(0x007C69DC + 1, 0x64);
+	Memory::WriteByte(0x007C69DC + 2, 0x01);
+	Memory::WriteByte(0x007C70B3 + 2, 0xF9); // Scrollbar Fix, ty Angel
+	//Player Scrollbar Length
+	Memory::WriteByte(0x007C6A3A + 1, 0x40);
+	Memory::WriteByte(0x007C6A3A + 2, 0x01);
+	Memory::WriteByte(0x007C7081 + 2, 0xF8); // Scrollbar Fix, ty Angel
 
 	#pragma endregion
 
