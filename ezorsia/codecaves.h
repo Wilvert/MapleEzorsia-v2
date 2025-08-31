@@ -28,6 +28,215 @@ __declspec(naked) void LoadUItwice() {
 	}
 }
 
+//Expanded item
+
+// Edit Foggy Set the isItemSlotIDover96 to ture if ID is over 96
+DWORD getItemSlotRectNewRtn = 0x0081E2CD;
+__declspec(naked) void getItemSlotRectNew()
+{
+	__asm {
+		push ebp
+		mov ebp, esp
+		push ecx
+		push ecx
+		pushad
+		pushfd
+		mov eax, [ebp + 8]
+		cmp eax, 60h
+		setg byte ptr[isItemSlotIDover96]
+		jle skip_sub
+		sub eax, 60h
+		mov[ebp + 8], eax
+		skip_sub :
+		popfd
+			popad
+			jmp getItemSlotRectNewRtn
+	}
+}
+// Edit Foggy Drawing slots with ID over 96 with the same pos.x and higher pos.y as the slots with ID - 96
+DWORD updateItemSlotRectValRtn = 0x0081E394;
+DWORD updateItemSlotRectTemp = 0xFFFFFFFF;	// Temporary register
+__declspec(naked) void updateItemSlotRectVal()
+{
+	__asm {
+		mov dword ptr[updateItemSlotRectTemp], ebx
+		mov bl, byte ptr[isItemSlotIDover96]
+		test bl, bl
+		jz sub_notOver1
+		add edx, dword ptr[diffFullItemHeight]
+		sub_notOver1 :
+		push edx
+			lea edx, dword ptr[ecx + 28h]
+			push edx
+			add eax, 32h
+			test bl, bl
+			jz sub_notOver2
+			add eax, dword ptr[diffFullItemHeight]
+			sub_notOver2 :
+		push eax
+			add ecx, 8
+			push ecx
+			mov ebx, dword ptr[updateItemSlotRectTemp]
+			jmp updateItemSlotRectValRtn
+	}
+}
+// Edit Foggy Drawing disabled icon on Item UI (unlocked slot)
+DWORD itemSlotLimitExpandedARtn = 0x0081DF7A;
+__declspec(naked) void itemSlotLimitExpandedA()
+{
+	__asm {
+		cmp edx, 0xC0
+		mov dword ptr[ebp + 8], edx
+		jmp itemSlotLimitExpandedARtn
+	}
+}
+
+// Edit Foggy Drawing disabled icon on Item UI (unlocked slot)
+DWORD itemSlotLimitExpandedBRtn = 0x0081E025;
+__declspec(naked) void itemSlotLimitExpandedB()
+{
+	__asm {
+		inc dword ptr[ebp + 8]
+		cmp dword ptr[ebp + 8], 0xC0
+		jmp itemSlotLimitExpandedBRtn
+	}
+}
+DWORD itemSlotLimitExpandedCRtn = 0x0081DBE6;
+__declspec(naked) void itemSlotLimitExpandedC()
+{
+	__asm {
+		push 0xC1
+		pop ebx
+		jmp itemSlotLimitExpandedCRtn
+	}
+}
+DWORD itemSlotLimitExpandedD1Rtn = 0x004B1634;
+__declspec(naked) void itemSlotLimitExpandedD1()
+{
+	__asm {
+		cmp eax, 0xC0
+		setle bl
+		jmp itemSlotLimitExpandedD1Rtn
+	}
+}
+DWORD itemSlotLimitExpandedD2Rtn = 0x004B165C;
+__declspec(naked) void itemSlotLimitExpandedD2()
+{
+	__asm {
+		cmp eax, 0xC0
+		setle bl
+		jmp itemSlotLimitExpandedD2Rtn
+	}
+}
+DWORD itemSlotLimitExpandedD3Rtn = 0x004B1684;
+__declspec(naked) void itemSlotLimitExpandedD3()
+{
+	__asm {
+		cmp eax, 0xC0
+		setle bl
+		jmp itemSlotLimitExpandedD3Rtn
+	}
+}
+DWORD itemSlotLimitExpandedD4Rtn = 0x004B16A9;
+__declspec(naked) void itemSlotLimitExpandedD4()
+{
+	__asm {
+		cmp esi, 0xC0
+		setle dl
+		jmp itemSlotLimitExpandedD4Rtn
+	}
+}
+DWORD itemSlotLimitExpandedERtn = 0x0047AA74;
+__declspec(naked) void itemSlotLimitExpandedE()
+{
+	__asm {
+		cmp ebx, 0xC0
+		jle skip_sub
+		push eax
+		mov eax, 0x0047AAD1
+		mov dword ptr[itemSlotLimitExpandedERtn], eax
+		pop eax
+		skip_sub :
+		jmp itemSlotLimitExpandedERtn
+	}
+}
+DWORD itemSlotLimitExpandedFRtn = 0x00470917;
+__declspec(naked) void itemSlotLimitExpandedF()
+{
+	__asm {
+		add ecx, eax
+		cmp ecx, 0xC0
+		jmp itemSlotLimitExpandedFRtn
+	}
+}
+DWORD itemSlotLimitExpandedGRtn = 0x0081D34B;
+__declspec(naked) void itemSlotLimitExpandedG()
+{
+	__asm {
+		cmp eax, 0xC0
+		jge skip_sub
+		push eax
+		mov eax, 0x0081D35A
+		mov dword ptr[itemSlotLimitExpandedGRtn], eax
+		pop eax
+		skip_sub :
+		jmp itemSlotLimitExpandedGRtn
+	}
+}
+DWORD itemSlotLimitExpandedHRtn = 0x00470917;
+__declspec(naked) void itemSlotLimitExpandedH()
+{
+	__asm {
+		add ecx, eax
+		cmp ecx, 0xC0
+		jmp itemSlotLimitExpandedHRtn
+	}
+}
+DWORD itemSlotLimitExpandedIRtn = 0x0046C2E0;
+__declspec(naked) void itemSlotLimitExpandedI()
+{
+	__asm {
+		add eax, 3
+		cmp eax, 0xC0
+		jmp itemSlotLimitExpandedIRtn
+	}
+}
+DWORD CUIItemCoinPosYRtn = 0x0081DD64;
+__declspec(naked) void CUIItemCoinPosY()
+{
+	__asm {
+		cmp dword ptr[ebx + 604h], 0
+		jz skip_isSmallItem
+		mov eax, dword ptr[diffFullItemHeight]
+		add eax, 0x10A
+		push eax
+		mov eax, esp
+		jmp skip_step
+		skip_isSmallItem :
+		push 0x10A
+			skip_step :
+			jmp CUIItemCoinPosYRtn
+	}
+}
+DWORD CUIItemBtCoinPosYRtn = 0x0081CD6C;
+__declspec(naked) void CUIItemBtCoinPosY()
+{
+	__asm {
+		cmp dword ptr[esi + 604h], 0
+		jz skip_isSmallItem
+		mov ebx, dword ptr[diffFullItemHeight]
+		add ebx, 0x10A
+		push ebx
+		xor ebx, ebx
+		jmp skip_step
+		skip_isSmallItem :
+		push 0x10A
+			skip_step :
+			jmp CUIItemBtCoinPosYRtn
+	}
+}
+
+
 // Double Jump Mechanics - Ezorsia V2
 
 // Part 1: Evaluate Jump State

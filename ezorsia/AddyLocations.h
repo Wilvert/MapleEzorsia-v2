@@ -452,3 +452,27 @@ const DWORD dwLoginFindIDBtn = 0x00620735;
 const DWORD dwLoginSaveIDBtn = 0x006206BE;
 const DWORD dwLoginWebHomeBtn = 0x006208A0;
 const DWORD dwLoginWebRegisterBtn = 0x00620829;
+
+// ===== Expanded Item =====
+const unsigned int newFullItemHeight = 0x1F6;
+unsigned int diffFullItemHeight = newFullItemHeight - 0x121;
+const DWORD CUIItemHeight = 0x0081C512;
+const DWORD CUIItemBtCashShopPosY = 0x0081CEFE;
+const DWORD CUIItemExpandItemHeight = 0x0081E5BC;
+bool isItemSlotIDover96 = false;
+const DWORD getItemSlotRectNewAddress = 0x0081E2C8;
+const DWORD updateItemSlotRectValAddress = 0x0081E387;
+const DWORD itemSlotLimitExpandedAAddress = 0x0081DF74;
+const DWORD itemSlotLimitExpandedBAddress = 0x0081E01E;
+const DWORD itemSlotLimitExpandedCAddress = 0x0081DBD0;
+const DWORD itemSlotLimitExpandedD1Address = 0x004B162E;
+const DWORD itemSlotLimitExpandedD2Address = 0x004B1656;
+const DWORD itemSlotLimitExpandedD3Address = 0x004B167E;
+const DWORD itemSlotLimitExpandedD4Address = 0x004B16A3;
+const DWORD itemSlotLimitExpandedEAddress = 0x0047AA6F;
+const DWORD itemSlotLimitExpandedFAddress = 0x00470912;
+const DWORD itemSlotLimitExpandedGAddress = 0x0081D346;
+const DWORD itemSlotLimitExpandedHAddress = 0x00470912;
+const DWORD itemSlotLimitExpandedIAddress = 0x0046C2DA;
+const DWORD CUIItemCoinPosYAddress = 0x0081DD5F;
+const DWORD CUIItemBtCoinPosYAddress = 0x0081CD67;
