@@ -71,6 +71,7 @@ void MainFunc() {
 
 	std::cout << "Applying resolution " << Client::m_nGameWidth << "x" << Client::m_nGameHeight << std::endl;
 	Client::UpdateResolution();
+	Client::ExpandItem();
 
 	dinput8::CreateHook();	std::cout << "dinput8 hook initialized" << std::endl;
 }
