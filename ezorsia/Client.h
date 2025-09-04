@@ -11,7 +11,6 @@ public:
 	static int m_nGameWidth;
 	static int MsgAmount;
 	static bool WindowedMode;
-	static void ExpandItem();
 	static std::string dFont;
 	static bool RemoveLogos;
 	static double setDamageCap;
