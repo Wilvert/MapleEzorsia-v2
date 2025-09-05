@@ -452,3 +452,29 @@ const DWORD dwLoginFindIDBtn = 0x00620735;
 const DWORD dwLoginSaveIDBtn = 0x006206BE;
 const DWORD dwLoginWebHomeBtn = 0x006208A0;
 const DWORD dwLoginWebRegisterBtn = 0x00620829;
+
+// ExpandedItem.h-------------------------------------------
+
+const unsigned int newFullItemHeight = 0x1F6;						// UI/UIWindows/Item/FullBackgrnd
+unsigned int diffFullItemHeight = newFullItemHeight - 0x121;		//
+const DWORD CUIItemHeight = 0x0081C512;					// PUSH
+const DWORD CUIItemBtCashShopPosY = 0x0081CEFE;			// PUSH
+const DWORD CUIItemExpandItemHeight = 0x0081E5BC;		// PUSH
+bool isItemSlotIDover96 = false;						// GetItemSlotRect@CUIItem
+const DWORD getItemSlotRectNewAddress = 0x0081E2C8;		// CodeCaveGetItemSlotRect@CUIItem
+const DWORD updateItemSlotRectValAddress = 0x0081E387;	// CodeCaveGetItemSlotRect@CUIItem
+const DWORD itemSlotLimitExpandedAAddress = 0x0081DF74;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedBAddress = 0x0081E01E;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedCAddress = 0x0081DBD0;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedD1Address = 0x004B162E;		// CodeCaveCCSWnd_Inventory::EnableExButton
+const DWORD itemSlotLimitExpandedD2Address = 0x004B1656;		// CodeCaveCCSWnd_Inventory::EnableExButton
+const DWORD itemSlotLimitExpandedD3Address = 0x004B167E;		// CodeCaveCCSWnd_Inventory::EnableExButton
+const DWORD itemSlotLimitExpandedD4Address = 0x004B16A3;		// CodeCaveCCSWnd_Inventory::EnableExButton
+const DWORD itemSlotLimitExpandedEAddress = 0x0047AA6F;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedFAddress = 0x00470912;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedGAddress = 0x0081D346;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedHAddress = 0x00470912;		// CodeCaveCUIItem::Draw
+const DWORD itemSlotLimitExpandedIAddress = 0x0046C2DA;		// CodeCaveCUIItem::Draw
+const DWORD CUIItemCoinPosYAddress = 0x0081DD5F;			// CodeCaveCUIItem::Draw
+const DWORD CUIItemBtCoinPosYAddress = 0x0081CD67;			// CodeCaveCUIItem::OnCreate
+const DWORD COnPacketItemSort2_DecodeSize = 0x00A1EC22;	// CWvsContext::OnInventoryOperation

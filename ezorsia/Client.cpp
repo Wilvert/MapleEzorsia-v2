@@ -861,3 +861,28 @@ void Client::UpdateLogin() {	//un-used //may still contain some useful addresses
 	Memory::WriteByte(dwLoginWebHomeBtn + 1, -127); // x-pos
 	Memory::WriteByte(dwLoginWebRegisterBtn + 1, -127); // x-pos
 }
+
+void Client::ExpandItem()
+{
+	Memory::WriteInt(CUIItemHeight + 1, newFullItemHeight);
+	Memory::WriteInt(CUIItemExpandItemHeight + 1, newFullItemHeight);
+	Memory::WriteInt(CUIItemBtCashShopPosY + 1, 0x10A + diffFullItemHeight);
+	Memory::WriteInt(COnPacketItemSort2_DecodeSize + 1, 0xFFA05AE5);
+	Memory::WriteByte(COnPacketItemSort2_DecodeSize + 6, 0xB7);
+	Memory::CodeCave(getItemSlotRectNew, getItemSlotRectNewAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedA, itemSlotLimitExpandedAAddress, 6);
+	Memory::CodeCave(itemSlotLimitExpandedB, itemSlotLimitExpandedBAddress, 7);
+	Memory::CodeCave(itemSlotLimitExpandedC, itemSlotLimitExpandedCAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedD1, itemSlotLimitExpandedD1Address, 6);
+	Memory::CodeCave(itemSlotLimitExpandedD2, itemSlotLimitExpandedD2Address, 6);
+	Memory::CodeCave(itemSlotLimitExpandedD3, itemSlotLimitExpandedD3Address, 6);
+	Memory::CodeCave(itemSlotLimitExpandedD4, itemSlotLimitExpandedD4Address, 6);
+	Memory::CodeCave(itemSlotLimitExpandedE, itemSlotLimitExpandedEAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedF, itemSlotLimitExpandedFAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedG, itemSlotLimitExpandedGAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedH, itemSlotLimitExpandedHAddress, 5);
+	Memory::CodeCave(itemSlotLimitExpandedI, itemSlotLimitExpandedIAddress, 6);
+	Memory::CodeCave(updateItemSlotRectVal, updateItemSlotRectValAddress, 13);
+	Memory::CodeCave(CUIItemCoinPosY, CUIItemCoinPosYAddress, 5);
+	Memory::CodeCave(CUIItemBtCoinPosY, CUIItemBtCoinPosYAddress, 5);
+}
